@@ -1,0 +1,19 @@
+.action-btn {
+  margin-top: 2rem;
+}
+.is-correct{
+  background-color: green;
+}
+
+.no-selected{
+  background-color: grey;
+  
+  
+
+}
+
+button{
+  margin: 5px;
+  display: block;
+  width: 300px;
+}

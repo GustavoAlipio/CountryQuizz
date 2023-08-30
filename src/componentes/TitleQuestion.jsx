@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
-const TitleQuestion = ({ capital }) => {
+const TitleQuestion = ({ capitalTitleQuestion }) => {
   return (
     <p>
-      <b style={{ marginRight: "5px" }}>{capital}</b>
+      <b>{capitalTitleQuestion?.capital[0] + "      "}</b>
       is the capital of:
     </p>
   );
