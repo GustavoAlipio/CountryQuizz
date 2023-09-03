@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
-const TitleQuestion = ({ capitalTitleQuestion }) => {
+const TitleQuestion = ({ label, flagImg, showFlag }) => {
   return (
-    <p>
-      <b>{capitalTitleQuestion?.capital[0] + "      "}</b>
-      is the capital of:
-    </p>
+    <>
+      {showFlag && <img src={flagImg} width={100} />}
+      <p>{label}</p>
+    </>
   );
 };
 export default TitleQuestion;

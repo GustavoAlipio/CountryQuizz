@@ -4,6 +4,9 @@
 .is-correct{
   background-color: green;
 }
+.is-incorrect{
+  background-color: red;
+}
 
 .no-selected{
   background-color: grey;
@@ -16,4 +19,9 @@ button{
   margin: 5px;
   display: block;
   width: 300px;
+}
+
+button:hover{
+
+background-color: black  ;
 }

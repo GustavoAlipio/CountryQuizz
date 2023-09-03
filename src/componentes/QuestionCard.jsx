@@ -6,38 +6,54 @@ import "./QuestionCard.css";
 import { useEffect, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function QuestionCard({ countriesInQuestionCard }) {
+export default function QuestionCard({ countries, countAnswers, isRuning }) {
   const [countriesSelected, setCountriesSelected] = useState([]);
   const [next, setNext] = useState(0);
   useEffect(() => {
     let auxArray = [];
     while (auxArray.length < 4) {
       auxArray = [
-        countriesInQuestionCard[
-          Math.floor(Math.random() * countriesInQuestionCard.length)
-        ],
+        countries[Math.floor(Math.random() * countries.length)],
         ...auxArray,
       ];
     }
     setCountriesSelected(auxArray);
-  }, [next, countriesInQuestionCard]);
+  }, [next, countries]);
 
-  let country = countriesSelected[Math.floor(Math.random() * 4)]; //country that gets choosen randomly
-
+  let correctIndex = Math.floor(Math.random() * 4);
+  let country = countriesSelected[correctIndex]; //country that gets choosen randomly
   function onNext() {
     setNext(next + 1);
     console.log("onnext");
   }
 
+  if (Boolean(country) === false) {
+    return <p>loading</p>;
+  }
+
+  let label = "Which country does this flag belong to ?";
+  if (next % 2 === 0) {
+    label = `${country.capital[0]} is the capital of : `;
+  }
+
   return (
     <>
-      <TitleQuestion capitalTitleQuestion={country} />
-
-      <AnswersList
-        countriesSelectedAnswersList={countriesSelected}
-        countryChoosed={country}
-        onNext={onNext}
-      />
+      {/*Capital questions*/}
+      <>
+        <TitleQuestion
+          label={label}
+          flagImg={country.flags.png}
+          showFlag={next % 2 !== 0}
+        />
+        <AnswersList
+          countriesSelectedAnswersList={countriesSelected}
+          countryChoosed={country}
+          onNext={onNext}
+          correctIndex={correctIndex}
+          countAnswers={countAnswers}
+          isRuning={isRuning}
+        />
+      </>
     </>
   );
 }
