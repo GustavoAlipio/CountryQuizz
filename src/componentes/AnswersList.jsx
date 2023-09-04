@@ -1,64 +1,43 @@
 /* eslint-disable react/prop-types */
 import "./AnswersList.css";
 import { useState } from "react";
-const AnswersList = ({
-  countriesSelectedAnswersList,
-  countryChoosed,
-  onNext,
-  correctIndex,
-  countAnswers,
-  isRuning,
-}) => {
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [visibleNext, setVisibleNext] = useState(false);
-  const [buttonStates, setButtonStates] = useState(Array(4).fill(false));
-
-  const checkAnswerCorrect = (optionSelected, index) => () => {
-    if (index != correctIndex) {
-      setTimeout(() => {
-        isRuning();
-      }, 0);
-    }
-
+const AnswersList = ({ options, countryChoosed, onNext }) => {
+  const [userSelectAnswer, setUserSelectAnswer] = useState(false);
+  const [selectedOption, setSelectedOption] = useState({});
+  console.log(options);
+  const handleNext = () => {
+    setSelectedOption({});
+    setUserSelectAnswer(false);
+    onNext();
+  };
+  const checkAnswerCorrect = (optionSelected) => () => {
     let isCorrect = countryChoosed.name.official === optionSelected;
-    setSelectedOptions((curr) => ({
-      ...curr,
-      [optionSelected]: isCorrect,
-    }));
-
-    const newButtonStates = [...buttonStates];
-    newButtonStates[index] = !newButtonStates[index];
-    setButtonStates(() => newButtonStates);
-
-    ////
-    setVisibleNext((prev) => !prev);
-    ////
-    ////Painting the button
+    setUserSelectAnswer(true);
+    setSelectedOption((curr) => ({ ...curr, [optionSelected]: isCorrect }));
   };
 
-  const handleNext = () => {
-    setButtonStates(() => Array(4).fill(false));
-
-    setSelectedOptions({});
-    onNext();
-    setVisibleNext((prev) => !prev);
-    countAnswers();
+  const getColorButton = (officialName) => {
+    return Object.keys(selectedOption)[0] === officialName
+      ? selectedOption[officialName]
+        ? "is-correct"
+        : "is-incorrect"
+      : userSelectAnswer
+      ? officialName === countryChoosed.name.official
+        ? "is-correct"
+        : "no-selected"
+      : "no-selected";
   };
 
   return (
     <>
-      {countriesSelectedAnswersList.map(({ name }, index) => {
+      {options.map(({ name }) => {
         return (
           <button
-            key={index}
-            className={
-              buttonStates[index]
-                ? index === correctIndex
-                  ? "is-correct"
-                  : "is-incorrect"
-                : "no-selected"
-            }
-            onClick={checkAnswerCorrect(name.official, index)}
+            key={name.common}
+            className={getColorButton(name.official)}
+            onClick={checkAnswerCorrect(name.official)}
+            disabled={userSelectAnswer}
+            style={{ cursor: userSelectAnswer ? "not-allowed" : "pointer" }}
           >
             {name.common}
           </button>
@@ -66,17 +45,11 @@ const AnswersList = ({
       })}
 
       <div className="action-btn">
-        {
-          <button
-            className="action-next"
-            onClick={handleNext}
-            disabled={!visibleNext}
-          >
-            Next
-          </button>
-        }
+        <button className="action-next" onClick={handleNext}>
+          Next
+        </button>
 
-        <div>{JSON.stringify(selectedOptions)}</div>
+        <div>{JSON.stringify(selectedOption)}</div>
       </div>
     </>
   );

@@ -6,7 +6,7 @@ import "./QuestionCard.css";
 import { useEffect, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export default function QuestionCard({ countries, countAnswers, isRuning }) {
+export default function QuestionCard({ countries }) {
   const [countriesSelected, setCountriesSelected] = useState([]);
   const [next, setNext] = useState(0);
   useEffect(() => {
@@ -35,7 +35,9 @@ export default function QuestionCard({ countries, countAnswers, isRuning }) {
   if (next % 2 === 0) {
     label = `${country.capital[0]} is the capital of : `;
   }
-
+  if (Boolean(countriesSelected) === false) {
+    return <p>Loading...</p>;
+  }
   return (
     <>
       {/*Capital questions*/}
@@ -46,12 +48,9 @@ export default function QuestionCard({ countries, countAnswers, isRuning }) {
           showFlag={next % 2 !== 0}
         />
         <AnswersList
-          countriesSelectedAnswersList={countriesSelected}
+          options={countriesSelected}
           countryChoosed={country}
           onNext={onNext}
-          correctIndex={correctIndex}
-          countAnswers={countAnswers}
-          isRuning={isRuning}
         />
       </>
     </>

@@ -17,10 +17,10 @@ function App() {
     setCorrectAnswers((correctAnswers) => correctAnswers + 1);
   };
   const isRuning = () => {
-    setRun(() => false);
+    setRun(false);
   };
   const tryAgain = () => {
-    setRun(() => true);
+    setRun(true);
     setCorrectAnswers(() => 0);
   };
 
