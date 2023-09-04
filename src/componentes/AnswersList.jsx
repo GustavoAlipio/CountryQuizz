@@ -2,30 +2,39 @@
 import "./AnswersList.css";
 import { useState } from "react";
 const AnswersList = ({ options, countryChoosed, onNext }) => {
-  const [userSelectAnswer, setUserSelectAnswer] = useState(false);
   const [selectedOption, setSelectedOption] = useState({});
   console.log(options);
   const handleNext = () => {
     setSelectedOption({});
-    setUserSelectAnswer(false);
+
     onNext();
   };
   const checkAnswerCorrect = (optionSelected) => () => {
     let isCorrect = countryChoosed.name.official === optionSelected;
-    setUserSelectAnswer(true);
-    setSelectedOption((curr) => ({ ...curr, [optionSelected]: isCorrect }));
+
+    setSelectedOption((curr) => ({
+      ...curr,
+      [optionSelected]: isCorrect ? "is-correct" : "is-incorrect",
+    }));
   };
+  const userHasSelectedAnOption = Object.keys(selectedOption).length > 0;
 
   const getColorButton = (officialName) => {
-    return Object.keys(selectedOption)[0] === officialName
-      ? selectedOption[officialName]
-        ? "is-correct"
-        : "is-incorrect"
-      : userSelectAnswer
-      ? officialName === countryChoosed.name.official
-        ? "is-correct"
-        : "no-selected"
-      : "no-selected";
+    const [optionChoosen] = Object.keys(selectedOption);
+
+    if (optionChoosen === officialName) {
+      return selectedOption[officialName];
+    }
+
+    // Check if the user has selected an option and the official name matches
+    if (
+      userHasSelectedAnOption &&
+      officialName === countryChoosed.name.official
+    ) {
+      return "is-correct";
+    }
+    // If none of the above conditions are met, return "no-selected"
+    return "no-selected";
   };
 
   return (
@@ -36,8 +45,10 @@ const AnswersList = ({ options, countryChoosed, onNext }) => {
             key={name.common}
             className={getColorButton(name.official)}
             onClick={checkAnswerCorrect(name.official)}
-            disabled={userSelectAnswer}
-            style={{ cursor: userSelectAnswer ? "not-allowed" : "pointer" }}
+            disabled={userHasSelectedAnOption}
+            style={{
+              cursor: userHasSelectedAnOption ? "not-allowed" : "pointer",
+            }}
           >
             {name.common}
           </button>
