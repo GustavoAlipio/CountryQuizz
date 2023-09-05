@@ -1,21 +1,33 @@
 /* eslint-disable react/prop-types */
 import "./AnswersList.css";
 import { useState } from "react";
-const AnswersList = ({ options, countryChoosed, onNext }) => {
+const AnswersList = ({
+  options,
+  countryChoosed,
+  onNext,
+  countAnswers,
+  isRuning,
+}) => {
   const [selectedOption, setSelectedOption] = useState({});
-  console.log(options);
-  const handleNext = () => {
-    setSelectedOption({});
-
-    onNext();
-  };
+  const [aux, setAux] = useState(null);
   const checkAnswerCorrect = (optionSelected) => () => {
+    setAux(null);
     let isCorrect = countryChoosed.name.official === optionSelected;
-
+    setAux(() => isCorrect);
     setSelectedOption((curr) => ({
       ...curr,
       [optionSelected]: isCorrect ? "is-correct" : "is-incorrect",
     }));
+  };
+
+  const handleNext = () => {
+    setSelectedOption({});
+    if (!aux) {
+      isRuning();
+    } else {
+      countAnswers();
+    }
+    onNext();
   };
   const userHasSelectedAnOption = Object.keys(selectedOption).length > 0;
 
@@ -59,8 +71,6 @@ const AnswersList = ({ options, countryChoosed, onNext }) => {
         <button className="action-next" onClick={handleNext}>
           Next
         </button>
-
-        <div>{JSON.stringify(selectedOption)}</div>
       </div>
     </>
   );

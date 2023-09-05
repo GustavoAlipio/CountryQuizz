@@ -1,9 +1,9 @@
-#root {
+ #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: purple;
+  background-color:    grey;
   border-radius: 10px;
 }
 
@@ -11,4 +11,4 @@
 .start-quizz{
   width: 100px;
   padding: 20px 5px
-}
+} 

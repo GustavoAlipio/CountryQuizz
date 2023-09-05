@@ -9,16 +9,16 @@
 }
 
 .no-selected{
-  background-color: grey;
-  
-  
-
+  background-color: white;
+  border-color: blue;
+  color: blue;
 }
 
 button{
   margin: 5px;
   display: block;
   width: 300px;
+  background-color: white;
 }
 
 button:hover{
