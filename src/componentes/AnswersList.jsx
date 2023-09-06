@@ -51,23 +51,23 @@ const AnswersList = ({
 
   return (
     <>
-      {options.map(({ name }) => {
-        return (
-          <button
-            key={name.common}
-            className={getColorButton(name.official)}
-            onClick={checkAnswerCorrect(name.official)}
-            disabled={userHasSelectedAnOption}
-            style={{
-              cursor: userHasSelectedAnOption ? "not-allowed" : "pointer",
-            }}
-          >
-            {name.common}
-          </button>
-        );
-      })}
+      <div className="answers-container">
+        {options.map(({ name }) => {
+          return (
+            <button
+              key={name.common}
+              className={getColorButton(name.official)}
+              onClick={checkAnswerCorrect(name.official)}
+              disabled={userHasSelectedAnOption}
+              style={{
+                cursor: userHasSelectedAnOption ? "not-allowed" : "pointer",
+              }}
+            >
+              {name.common}
+            </button>
+          );
+        })}
 
-      <div className="action-btn">
         <button className="action-next" onClick={handleNext}>
           Next
         </button>

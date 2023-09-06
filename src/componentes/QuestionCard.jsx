@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function QuestionCard({ countries, isRuning, countAnswers }) {
   const [countriesSelected, setCountriesSelected] = useState([]);
   const [next, setNext] = useState(0);
+
   useEffect(() => {
     function selectRandomCountries(array, cantidad) {
       if (array.length < cantidad) {
@@ -28,11 +29,15 @@ export default function QuestionCard({ countries, isRuning, countAnswers }) {
 
     setCountriesSelected(selectRandomCountries(countries, 4));
   }, [next, countries]);
+  let country;
+  if (countriesSelected.length === 0) {
+    return <p>Loading...</p>;
+  } else {
+    country = countriesSelected[Math.floor(Math.random() * 4)];
+  }
 
-  let country = countriesSelected[Math.floor(Math.random() * 4)]; //country that gets choosen randomly
   function onNext() {
     setNext(next + 1);
-    console.log("onnext");
   }
 
   if (Boolean(country) === false) {
@@ -41,7 +46,7 @@ export default function QuestionCard({ countries, isRuning, countAnswers }) {
 
   let label = "Which country does this flag belong to ?";
   if (next % 2 === 0) {
-    label = `${country?.capital[0]} is the capital of : `;
+    label = `${country.capital[0]} is the capital of : `;
   }
   if (Boolean(countriesSelected) === false) {
     return <p>Loading...</p>;

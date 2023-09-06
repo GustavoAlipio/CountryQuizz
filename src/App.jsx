@@ -4,7 +4,6 @@ import "./App.css";
 import { useCountries } from "./hooks/useCountries";
 import QuestionCard from "./componentes/QuestionCard";
 function App() {
-  // const [countriesSelected, setCountriesSelected] = useState([]);
   const [start, setStart] = useState(true);
   const countries = useCountries();
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -26,29 +25,36 @@ function App() {
 
   return (
     <>
-      <section>
-        <h1>Country Quiz</h1>
-
-        {start ? (
-          <button className="start-quizz" onClick={handleStart}>
-            Start quizz
+      <h1>COUNTRY QUIZ </h1>
+      {run && (
+        <div className="earth-icon">
+          <img src="./src/icons/earth.svg" alt="earth-icon" />
+        </div>
+      )}
+      {start ? (
+        <button className="start-quizz" onClick={handleStart}>
+          Start quizz
+        </button>
+      ) : run ? (
+        <QuestionCard
+          className="Question-Card"
+          countries={countries}
+          countAnswers={countAnswers}
+          isRuning={isRuning}
+        />
+      ) : (
+        <div>
+          <img src="./src/icons/cup.svg" alt="cup-image" />
+          <p className="results">Results</p>
+          <p className="correct-answers">
+            You got <span className="big-number"> {correctAnswers} </span>
+            correct answers
+          </p>
+          <button className="try-again" onClick={tryAgain}>
+            Try Again
           </button>
-        ) : run ? (
-          <QuestionCard
-            className="Question-Card"
-            countries={countries}
-            countAnswers={countAnswers}
-            isRuning={isRuning}
-          />
-        ) : (
-          <div>
-            <h2>You got {correctAnswers} correct answers</h2>
-            <button className="try-again" onClick={tryAgain}>
-              Try Again
-            </button>
-          </div>
-        )}
-      </section>
+        </div>
+      )}
     </>
   );
 }
