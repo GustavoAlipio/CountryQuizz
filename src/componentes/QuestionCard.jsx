@@ -29,6 +29,7 @@ export default function QuestionCard({ countries, isRuning, countAnswers }) {
 
     setCountriesSelected(selectRandomCountries(countries, 4));
   }, [next, countries]);
+
   let country;
   if (countriesSelected.length === 0) {
     return <p>Loading...</p>;

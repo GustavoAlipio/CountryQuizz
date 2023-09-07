@@ -35,7 +35,6 @@ text-align: right;
 
 .start-quizz{
 width: 100px;
-padding: 20px 5px ;
 
 width: 209px;
 height: 62px;
@@ -47,8 +46,8 @@ font-size: 28px;
 font-weight: 640;
 line-height: 35px;
 letter-spacing: 0em;
-text-align: center;
 
+justify-content: center;
 
 position: absolute;
 top: 50%; 

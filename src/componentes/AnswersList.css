@@ -1,5 +1,5 @@
 button{  
-  width: 400px;
+  width: 350px;
   height: 56px;
   top: 556px;
   left: 520px;
@@ -12,8 +12,7 @@ button{
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0em;
-  border: 2px solid #6066D0B2
-
+  border: 2px solid #6066D0B2;
 }
 
 button:hover{
@@ -30,26 +29,53 @@ button:hover{
 }
 
 .answers-container{
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: center; 
   justify-content: center; 
   gap: 20px;
+  display: flex;
+  position: relative;
+
+
 }
+
 
 
 
 .action-next{
-width: 116px;
-height: 56px;
-top: 723px;
-left: 804px;
-border-radius: 12px;
-text-align: center;
-font-family: Poppins;
-font-size: 18px;
-font-weight: 700;
-line-height: 27px;
-letter-spacing: 0em;
+  width: 116px;
+  height: 56px;
+  top: 723px;
+  left: 804px;
+  border-radius: 12px;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0em;
 }
+.button-inside{
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  }
+  .text-button{
+    flex-grow: 1;
+    text-align: left; /
+  }
+  .check-error,.letter{
+    width: 24px; 
+    height: 24px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  }
+  .letter{
+    padding-right: 5px;
+  }
