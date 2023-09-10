@@ -28,7 +28,7 @@ function App() {
       <h1>COUNTRY QUIZ </h1>
       {run && (
         <div className="earth-icon">
-          <img src="./public/earth.svg" alt="earth-icon" />
+          <img src="/assets/earth.svg" alt="earth-icon" />
         </div>
       )}
       {start ? (
@@ -44,7 +44,7 @@ function App() {
         />
       ) : (
         <div>
-          <img src="./public/cup.svg" alt="cup-image" />
+          <img src="/assets/cup.svg" alt="cup-image" />
           <p className="results">Results</p>
           <p className="correct-answers">
             You got <span className="big-number"> {correctAnswers} </span>
