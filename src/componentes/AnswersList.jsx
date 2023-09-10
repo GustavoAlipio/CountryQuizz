@@ -43,14 +43,14 @@ const AnswersList = ({
       if (selectedOption[commonName] === "is-incorrect") {
         icon = (
           <i className="check-error">
-            <img src="./src/icons/error-icon.svg" alt="error-icon" />
+            <img src="./public/error-icon.svg" alt="error-icon" />
           </i>
         );
       }
       if (selectedOption[commonName] === "is-correct") {
         icon = (
           <i className="check-error">
-            <img src="./src/icons/check-icon.svg" alt="check-icon" />
+            <img src="./public/check-icon.svg" alt="check-icon" />
           </i>
         );
       }
@@ -61,7 +61,7 @@ const AnswersList = ({
     if (userHasSelectedAnOption && commonName === countryChoosed.name.common) {
       icon = (
         <i className="check-error">
-          <img src="./src/icons/check-icon.svg" alt="check-icon" />
+          <img src="./public/check-icon.svg" alt="check-icon" />
         </i>
       );
 
